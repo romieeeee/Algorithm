@@ -13,7 +13,7 @@ def bfs(x, y):
 
             # 길이 있고, 아직 방문하지 않았다면
             if 0 <= nx < n and 0 <= ny < m:
-                if not visited[nx][ny] and maze[nx][ny] == 1:
+                if maze[nx][ny] == 1:
                     maze[nx][ny] = maze[x][y] + 1
 
                     q.append([nx, ny])
@@ -23,11 +23,8 @@ def bfs(x, y):
 n, m = map(int, input().split())
 maze = [list(map(int, input().strip())) for _ in range(n)]
 
-visited = [[False] * m for _ in range (n)]
-
 dx = [1, 0, -1, 0]
 dy = [0, 1, 0, -1]
-
 
 min_steps = float('inf')
 
