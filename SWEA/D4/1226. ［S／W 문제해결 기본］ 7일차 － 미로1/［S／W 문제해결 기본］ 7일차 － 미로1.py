@@ -1,28 +1,50 @@
-def dfs(x, y):
-    global flag
-    visited[x][y] = True
+from collections import deque
 
-    if graph[x][y] == 3:
-        flag = True
-        return
+def bfs():
+    global q, res
 
-    for dx, dy in dir:
-        nx, ny = x+dx, y+dy
+    while q:
+        cx, cy = q.popleft()
 
-        if 0<=nx<16 and 0<=ny<16:
-            if graph[nx][ny] != 1 and not visited[nx][ny]:
-                dfs(nx, ny)
+        # 도착점 찾으면 종료
+        if graph[cx][cy] == 3:
+            res = 1
+            return
 
+        for dx, dy in dir:
+            nx, ny = cx+dx, cy+dy
+
+            if 0<=nx<16 and 0<=ny<16:
+                if not visited[nx][ny] and graph[nx][ny] != 1:
+                    visited[nx][ny] = True
+                    q.append((nx, ny))
+
+
+dir = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 for test_case in range(1, 11):
-    _ = int(input())
+    _ = input()
 
-    # 0: 길, 1: 벽, 2, 시작점, 3: 도착점
     graph = [list(map(int, input())) for _ in range (16)]
     visited = [[False] * 16 for _ in range (16)]
-
-    dir = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-
+    
+    x = y= 0
     flag = False
-    dfs(1, 1) # (1, 1)에서 시작
+    for i in range(16):
+        for j in range (16):
+            if graph[i][j] == 2:
+                x, y = i, j
 
-    print(f'#{test_case} {1 if flag else 0}')
+                flag = True
+                break
+        
+        if flag: break
+
+    res = 0
+
+    q = deque()
+    q.append((x, y))
+
+    visited[x][y] = True
+    bfs()
+
+    print(f'#{test_case} {res}')
