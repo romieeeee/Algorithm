@@ -1,26 +1,25 @@
-N = int(input()) # 컴퓨터의 수
-M = int(input()) # 간선의 수
+def dfs(v):
+    global virus
+    visited[v] = True
 
-def dfs(idx):
-    global visited, count
+    for nxt in graph[v]:
+        if graph[nxt] and not visited[nxt]:
+            virus += 1
+            dfs(nxt)
 
-    visited[idx] = True
-    count += 1
+n = int(input())
+net = int(input())
 
-    for next in range(N+1):
-        if(not visited[next] and graph[idx][next]):
-            dfs(next)
+graph = [[] for _ in range (n+1)]
+for _ in range (net):
+    u, v = map(int, input().split())
 
-graph = [[False] * (N+1) for _ in range (N+1)]
+    graph[u].append(v)
+    graph[v].append(u)
 
-for _ in range(M):
-    a, b = map(int, input().split())
-    graph[a][b] = True
-    graph[b][a] = True
+visited = [False] * (n+1)
 
-visited = [False] * (N+1)
+virus = 0
+dfs(1) # 1번 컴퓨터부터 시작
 
-count = 0
-dfs(1) # 1번 컴퓨터가 웜 바이러스에 걸렸을 때!
-
-print(count-1) # 1번 컴퓨터 제외
+print(virus)
