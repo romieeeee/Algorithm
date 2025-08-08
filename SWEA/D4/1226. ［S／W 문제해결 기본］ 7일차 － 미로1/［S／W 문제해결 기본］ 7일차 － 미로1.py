@@ -1,3 +1,18 @@
+# def dfs(x, y):
+#     global res
+
+#     visited[x][y] = True
+#     if graph[x][y] == 3:
+#         res = 1
+#         return
+
+#     for dx, dy in dir:
+#         nx, ny = x+dx, y+dy
+
+#         if 0<=nx<16 and 0<=ny<16:
+#             if not visited[nx][ny] and graph[nx][ny] != 1:
+#                 dfs(nx, ny)
+
 from collections import deque
 
 def bfs():
@@ -40,11 +55,13 @@ for test_case in range(1, 11):
         if flag: break
 
     res = 0
+    # dfs(x, y)   
 
     q = deque()
     q.append((x, y))
 
     visited[x][y] = True
+    
     bfs()
 
     print(f'#{test_case} {res}')
