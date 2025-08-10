@@ -1,26 +1,28 @@
-w, h = map(int, input().split()) # 가로 세로
-n = int(input()) # 칼로 잘라야 하는 점선의 개수
+n, m = map(int, input().split()) 
+num_line = int(input())
 
-width = [0, h]
-height = [0, w]
+w = [0, n]
+h = [0, m]
 
-for _ in range (n):
-    d, line = map(int, input().split())
+for _ in range(num_line):
+    a, b = map(int, input().split())
 
-    if d == 0: # 가로
-        width.append(line)
+    if a == 0:
+        h.append(b)
     else:
-        height.append(line)
+        w.append(b)
 
-width.sort()
-height.sort()
+w.sort()
+h.sort()
 
-w_max = 0
-for i in range (1, len(width)):
-    w_max = max(w_max, width[i] - width[i-1])
+max_w = 0
+for i in range(len(w)-1):
+    tmp = w[i+1] - w[i]
+    max_w = max(max_w, tmp)
 
-h_max = 0
-for i in range (1, len(height)):
-    h_max = max(h_max, height[i] - height[i-1])
+max_h = 0
+for i in range(len(h)-1):
+    tmp = h[i+1] - h[i]
+    max_h = max(max_h, tmp)
 
-print(w_max * h_max)
+print(max_w * max_h)
