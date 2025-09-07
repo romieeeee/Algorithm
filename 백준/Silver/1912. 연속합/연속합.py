@@ -1,0 +1,14 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+# 끝이 i인 연속 부분합의 최대!
+dp = [0] * n
+dp[0] = arr[0]
+
+for i in range (1, n):
+    dp[i] = max(arr[i], arr[i]+dp[i-1]) 
+
+print(max(dp))
