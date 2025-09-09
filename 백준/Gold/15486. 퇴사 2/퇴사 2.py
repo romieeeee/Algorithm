@@ -1,5 +1,5 @@
 import sys
-imput = sys.stdin.readline
+input = sys.stdin.readline
 
 n = int(input())
 
