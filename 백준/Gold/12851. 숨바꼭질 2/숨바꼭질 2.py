@@ -14,7 +14,7 @@ def bfs():
             print(count[cur])
             return
 
-        # case1: x-1 case2:x+1 case:x+3
+        # case1: x-1 case2: x+1 case: 2*x
         for nxt in [cur+1, cur-1, 2*cur]:
             if 0<=nxt<100001:
 
