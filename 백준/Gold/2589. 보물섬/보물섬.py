@@ -1,12 +1,7 @@
 import sys
 from collections import deque
 
-directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-
-def isLand(x, y):
-    if graph[x][y] == 'L':
-        return True
-        
+directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]      
 
 def bfs(x, y):
     q = deque()
