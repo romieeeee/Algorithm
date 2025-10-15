@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 # 방향 벡터 (위쪽 왼쪽 먼저!)
 dx = [1, 0, -1, 0]
