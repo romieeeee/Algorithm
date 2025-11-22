@@ -1,25 +1,22 @@
-def dfs(x, y):
-    global room, cnt, max_cnt
+dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
+def dfs(x, y,):
+    global cnt 
 
-    dir = [[1, 0], [0,1], [-1, 0], [0, -1]]
+    for i in range (4):
+        nx, ny = x+dx[i], y+dy[i]
 
-    for d in dir:
-        nx, ny = x+d[0], y+d[1]
-
-        # 범위 내에 있고 빙문하지 않았고 현재 값보다 1 크면 
-        if 0<=nx<n and 0<=ny<n:
-            if graph[nx][ny] - graph[x][y] == 1:
+        if 0<=nx<n and 0<=ny<n and graph[x][y]+1 == graph[nx][ny]:
                 cnt += 1
                 dfs(nx, ny)
 
 T = int(input())
-for test_case in range(1, T+1):
+for test_case in range (1, T+1):
     n = int(input())
-    graph = [list(map(int, input().split())) for _ in range (n)] # n*n 배열 생성
+    graph = [list(map(int, input().split())) for _ in range (n)]
 
-    room = n
+    start_num = 0
     max_cnt = 0
-
     for i in range (n):
         for j in range (n):
             cnt = 1
@@ -27,9 +24,9 @@ for test_case in range(1, T+1):
 
             if cnt > max_cnt:
                 max_cnt = cnt
-                room = graph[i][j]
+                start_num = graph[i][j]
 
-            elif cnt == max_cnt:
-                room = min(room, graph[i][j])
+            if cnt == max_cnt:
+                start_num = min(start_num, graph[i][j])
 
-    print(f'#{test_case} {room} {max_cnt}')
+    print(f'#{test_case} {start_num} {max_cnt}')
