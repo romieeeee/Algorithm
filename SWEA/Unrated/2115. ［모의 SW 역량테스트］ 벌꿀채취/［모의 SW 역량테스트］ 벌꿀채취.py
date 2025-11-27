@@ -40,8 +40,8 @@ for tc in range (1, T+1):
         
         dfs(0, 0, h1, 0, 0) # start, depth, arr, amount, profit
         
-        # if max_amount == c:
-        #   break
+        if max_amount == c:
+          break
         
       max_h1 = max_profit # h1의 최대 수익
 
@@ -62,8 +62,8 @@ for tc in range (1, T+1):
             
             dfs(0, 0, h2, 0, 0) # start, depth, arr, amount, profit
             
-            # if max_amount == c:
-            #   break
+            if max_amount == c:
+              break
           max_h2 = max(max_h2, max_profit)
       
       total = max(total, max_h1+max_h2)
