@@ -1,47 +1,33 @@
-def dfs(start, depth, arr, amount, profit):
-  global end, max_amount, max_profit
+def dfs(idx, arr, amount, profit):
+  global max_profit
   
   if amount > c:
     return
   
-  if depth == end:
-    max_amount = max(max_amount, amount)
+  if idx == m:
     max_profit = max(max_profit, profit)
     return
   
-  for i in range (start, m):
-    if not visited[i]:
-      visited[i] = True
-      profit += arr[i] ** 2 
-      
-      dfs(i, depth+1, arr, amount+arr[i], profit)
-      
-      profit -= arr[i] ** 2 
-      visited[i] = False
+  dfs(idx + 1, arr, amount + arr[idx], profit + arr[idx] ** 2)
+  
+  dfs(idx + 1, arr, amount, profit)
       
 T = int(input())
 for tc in range (1, T+1):
   n, m, c = map(int, input().split())
   graph = [list(map(int, input().split())) for _ in range (n)]
   
-  max_h1 = 0
   total = 0
   res = 0
   
+  max_h1 = 0
   for i in range (n):
     for j in range (n-m+1):
       h1 = graph[i][j:j+m]
       
-      max_amount = 0
       max_profit = 0      
       for k in range (1, m+1):
-        end = k
-        visited = [False] * m
-        
-        dfs(0, 0, h1, 0, 0) # start, depth, arr, amount, profit
-        
-        if max_amount == c:
-          break
+        dfs(0, h1, 0, 0) # idx, arr, amount, profit
         
       max_h1 = max_profit # h1의 최대 수익
 
@@ -54,16 +40,10 @@ for tc in range (1, T+1):
           
           h2 = graph[x][y:y+m]
           
-          max_amount = 0
           max_profit = 0
           for k in range (1, m+1):
-            end = k
-            visited = [False] * m
+            dfs(0, h2, 0, 0) # idx, arr, amount, profit
             
-            dfs(0, 0, h2, 0, 0) # start, depth, arr, amount, profit
-            
-            if max_amount == c:
-              break
           max_h2 = max(max_h2, max_profit)
       
       total = max(total, max_h1+max_h2)
