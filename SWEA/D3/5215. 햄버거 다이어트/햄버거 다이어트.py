@@ -1,26 +1,26 @@
-def dfs(depth, taste, kcal):
+def dfs(idx, taste, cal):
   global max_taste
-
-  if kcal > l:
-    return
   
-  max_taste = max(max_taste, taste)
-
-  if depth == n:
+  if idx == n:
+    if cal <= l:
+      max_taste = max(max_taste, taste)
+      
     return
 
-  dfs(depth+1, taste+arr[depth][0], kcal+arr[depth][1]) # 현재 햄버거 선택
-  dfs(depth+1, taste, kcal) # 선택 x
+  dfs(idx+1, taste+arr[idx][0], cal+arr[idx][1])
+  dfs(idx+1, taste, cal)
+    
 
 T = int(input())
-for test_case in range (1, T+1):
-
-  n, l = map(int, input().split()) # 재료의 수, 제한 칼로리
-
-  arr = [list(map(int, input().split())) for _ in range (n)]
-  visited = [False] * n
-
-  max_taste = 0
-  dfs(0, 0, 0)
-
-  print(f'#{test_case} {max_taste}')
+for tc in range (1, T+1):
+  n, l = map(int, input().split()) # 개수, 제한 칼로리
+  arr = []
+  
+  for _ in range (n):
+    arr.append(list(map(int, input().split())))
+    
+  max_taste = -1e9
+  dfs(0, 0, 0) # idx, taste, cal
+  
+  print(f'#{tc} {max_taste}')
+  
