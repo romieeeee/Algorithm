@@ -1,28 +1,28 @@
-T = int(input())
-
-def dfs(v):
-  visited[v] = True
-  
-  for nxt in graph[v]:
+def dfs(idx):
+  for nxt in graph[idx]:
     if not visited[nxt]:
+      visited[nxt] = True
       dfs(nxt)
 
-
-for test_case in range (1, T+1):
-  n, m = map(int, input().split())
-  graph = [[] for _ in range (n+1)]
-  visited = [False] * (n+1) 
+T = int(input())
+for tc in range (1, T+1):
+  n, m = map(int, input().split()) # 개수, 제한 칼로리
+  
+  graph = [[] * n for _ in range (n+1)]
+  visited = [False] * (n+1)
   
   for _ in range (m):
     u, v = map(int, input().split())
     graph[u].append(v)
     graph[v].append(u)
   
-  cnt = 0  
+  total = 0
   for i in range (1, n+1):
     if not visited[i]:
+      visited[i] = True
+      
       dfs(i)
-      cnt += 1
+      total += 1
   
-  print(f'#{test_case} {cnt}')
+  print(f'#{tc} {total}')
   
