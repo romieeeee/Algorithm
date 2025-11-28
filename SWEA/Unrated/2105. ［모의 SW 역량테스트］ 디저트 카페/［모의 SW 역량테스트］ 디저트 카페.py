@@ -4,6 +4,9 @@ d = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
 def dfs(x, y, di, turn, dessert):
     global sx, sy, max_value
 
+    if turn + (n * 2) <= max_value:
+        return
+
     if turn > 3:
         return
     
@@ -37,7 +40,7 @@ for test_case in range (1, T+1):
     graph = [list(map(int, input().split())) for _ in range (n)]
 
     max_value = -1
-    for i in range (n):
+    for i in range (1, n-1):
         for j in range (n):
             sx, sy = i, j
             dfs(i, j, 0, 0, []) # x, y, 현재 방향 인덱스, 회전 횟수, 방문한 디저트
